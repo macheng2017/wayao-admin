@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie'
+import config from '@/config'
 
 const app = {
   state: {
@@ -6,7 +7,8 @@ const app = {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false
     },
-    device: 'desktop'
+    device: 'desktop',
+    imageCDN: config.imageCDN
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {

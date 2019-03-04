@@ -11,6 +11,7 @@ import '@/styles/index.scss' // global css
 import App from './App'
 import store from './store'
 import router from './router'
+import Vuex from 'vuex'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -27,6 +28,7 @@ import '@/permission' // permission control
 // import '../mock' // simulation data
 
 Vue.use(ElementUI, { locale })
+Vue.use(Vuex)
 
 Vue.config.productionTip = false
 
