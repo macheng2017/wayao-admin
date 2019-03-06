@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
 export function login(username, password) {
-  console.log('login.js', username, password)
-  console.log(request)
+  // console.log('login.js', username, password)
+  // console.log(request)
   return request({
     url: '/user/signin',
     method: 'post',
