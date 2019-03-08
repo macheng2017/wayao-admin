@@ -12,6 +12,7 @@ import App from './App'
 import store from './store'
 import router from './router'
 import Vuex from 'vuex'
+import i18n from './lang' // Internationalization
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -27,7 +28,9 @@ import '@/permission' // permission control
 // 注释掉引用mock 数据解决不带cookies的问题
 // import '../mock' // simulation data
 
-Vue.use(ElementUI, { locale })
+// Vue.use(ElementUI, { locale })
+
+Vue.use(ElementUI, { locale, i18n: (key, value) => i18n.t(key, value) })
 Vue.use(Vuex)
 
 Vue.config.productionTip = false
@@ -36,5 +39,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

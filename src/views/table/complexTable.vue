@@ -91,26 +91,60 @@
         align="center"
         width="65"
       >
+        <!-- 标题 -->
         <template slot-scope="scope">
-          <span>{{ scope.row.id }}</span>
+          <span>{{ scope.$index+1 }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.date')" width="150px" align="center">
+      <!-- <el-table-column :label="$t('table.date')" width="150px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.meta.updatedAt | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
-      </el-table-column>
-      <el-table-column :label="$t('table.title')" min-width="150px">
+      </el-table-column>-->
+      <!-- <el-table-column :label="$t('table.title')" min-width="150px">
         <template slot-scope="scope">
           <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.title }}</span>
           <el-tag>{{ scope.row.type | typeFilter }}</el-tag>
         </template>
-      </el-table-column>
-      <el-table-column :label="$t('table.author')" width="110px" align="center">
+      </el-table-column>-->
+      <el-table-column label="图片" width="90">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <img
+            :src="'http://lining.xugaoyang.com/upload/img/' + scope.row.img"
+            width="70px"
+            height="70px"
+          >
         </template>
       </el-table-column>
+      <el-table-column label="颜色" width="250">
+        <template slot-scope="scope">{{ scope.row.color }}</template>
+      </el-table-column>
+      <el-table-column label="性别" width="110" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.sex }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="尺码" width="110" align="center">
+        <template slot-scope="scope">{{ scope.row.size }}</template>
+      </el-table-column>
+      <el-table-column label="款号" width="110" align="center">
+        <template slot-scope="scope">{{ scope.row.styleNumber }}</template>
+      </el-table-column>
+      <el-table-column label="发布季" width="110" align="center">
+        <template slot-scope="scope">{{ scope.row.season }}</template>
+      </el-table-column>
+      <el-table-column label="吊牌价" width="110" align="center">
+        <template slot-scope="scope">{{ scope.row.cardPrice }}</template>
+      </el-table-column>
+      <el-table-column label="淘宝价" width="110" align="center">
+        <template slot-scope="scope">{{ scope.row.taobaoPrice }}</template>
+      </el-table-column>
+      <el-table-column label="性别" width="110px" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.sex }}</span>
+        </template>
+      </el-table-column>
+
       <el-table-column
         v-if="showReviewer"
         :label="$t('table.reviewer')"
@@ -121,7 +155,7 @@
           <span style="color:red;">{{ scope.row.reviewer }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.importance')" width="80px">
+      <!-- <el-table-column :label="$t('table.importance')" width="80px">
         <template slot-scope="scope">
           <svg-icon
             v-for="n in +scope.row.importance"
@@ -130,7 +164,7 @@
             class="meta-item__icon"
           />
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <el-table-column :label="$t('table.readings')" align="center" width="95">
         <template slot-scope="scope">
           <span
@@ -141,24 +175,28 @@
           <span v-else>0</span>
         </template>
       </el-table-column>
+      <!-- 状态 -->
       <el-table-column :label="$t('table.status')" class-name="status-col" width="100">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
       </el-table-column>
+      <!-- 操作 -->
       <el-table-column
         :label="$t('table.actions')"
         align="center"
         width="230"
         class-name="small-padding fixed-width"
       >
+        <!-- 编辑 -->
         <template slot-scope="scope">
           <el-button
             type="primary"
             size="mini"
             @click="handleUpdate(scope.row)"
           >{{ $t('table.edit') }}</el-button>
-          <el-button
+          <!-- 发布 -->
+          <!-- <el-button
             v-if="scope.row.status!='published'"
             size="mini"
             type="success"
@@ -168,7 +206,7 @@
             v-if="scope.row.status!='draft'"
             size="mini"
             @click="handleModifyStatus(scope.row,'draft')"
-          >{{ $t('table.draft') }}</el-button>
+          >{{ $t('table.draft') }}</el-button>-->
           <el-button
             v-if="scope.row.status!='deleted'"
             size="mini"
@@ -182,11 +220,11 @@
     <pagination
       v-show="total>0"
       :total="total"
-      :page.sync="listQuery.page"
+      :page.sync="listQuery.p"
       :limit.sync="listQuery.limit"
       @pagination="getList"
     />
-
+    <!-- 弹窗 弹出表单 -->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form
         ref="dataForm"
@@ -196,7 +234,7 @@
         label-width="70px"
         style="width: 400px; margin-left:50px;"
       >
-        <el-form-item :label="$t('table.type')" prop="type">
+        <!-- <el-form-item :label="$t('table.type')" prop="type">
           <el-select v-model="temp.type" class="filter-item" placeholder="Please select">
             <el-option
               v-for="item in calendarTypeOptions"
@@ -212,11 +250,24 @@
             type="datetime"
             placeholder="Please pick a date"
           />
+        </el-form-item>-->
+        <el-form-item label="颜色" prop="title">
+          <el-input v-model="temp.color"/>
         </el-form-item>
-        <el-form-item :label="$t('table.title')" prop="title">
-          <el-input v-model="temp.title"/>
+        <el-form-item label="颜色" prop="title">
+          <el-input v-model="temp.color"/>
         </el-form-item>
-        <el-form-item :label="$t('table.status')">
+        <el-form-item label="颜色" prop="title">
+          <el-input v-model="temp.color"/>
+        </el-form-item>
+        <el-form-item label="颜色" prop="title">
+          <el-input v-model="temp.color"/>
+        </el-form-item>
+        <el-form-item label="颜色" prop="title">
+          <el-input v-model="temp.color"/>
+        </el-form-item>
+
+        <!-- <el-form-item :label="$t('table.status')">
           <el-select v-model="temp.status" class="filter-item" placeholder="Please select">
             <el-option v-for="item in statusOptions" :key="item" :label="item" :value="item"/>
           </el-select>
@@ -236,7 +287,7 @@
             type="textarea"
             placeholder="Please input"
           />
-        </el-form-item>
+        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">{{ $t('table.cancel') }}</el-button>
@@ -302,7 +353,7 @@ export default {
       total: 0,
       listLoading: true,
       listQuery: {
-        page: 1,
+        p: 1,
         limit: 20,
         importance: undefined,
         title: undefined,
@@ -360,7 +411,7 @@ export default {
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
+        this.list = response.data.products
         this.total = response.data.total
 
         // Just to simulate the time of the request
@@ -370,7 +421,7 @@ export default {
       })
     },
     handleFilter() {
-      this.listQuery.page = 1
+      this.listQuery.p = 1
       this.getList()
     },
     handleModifyStatus(row, status) {
