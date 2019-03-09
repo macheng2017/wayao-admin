@@ -251,20 +251,27 @@
             placeholder="Please pick a date"
           />
         </el-form-item>-->
-        <el-form-item label="颜色" prop="title">
+        <!-- rules 还没有编写,这个不是重点,重点是把原有的功能,先跑通,然后再添加新的功能 -->
+        <el-form-item label="颜色" prop="title1">
           <el-input v-model="temp.color"/>
         </el-form-item>
-        <el-form-item label="颜色" prop="title">
-          <el-input v-model="temp.color"/>
+        <el-form-item label="性别" prop="sex">
+          <el-input v-model="temp.sex"/>
         </el-form-item>
-        <el-form-item label="颜色" prop="title">
-          <el-input v-model="temp.color"/>
+        <el-form-item label="尺寸" prop="size">
+          <el-input v-model="temp.size"/>
         </el-form-item>
-        <el-form-item label="颜色" prop="title">
-          <el-input v-model="temp.color"/>
+        <el-form-item label="款号" prop="styleNumber">
+          <el-input v-model="temp.styleNumber"/>
         </el-form-item>
-        <el-form-item label="颜色" prop="title">
-          <el-input v-model="temp.color"/>
+        <el-form-item label="发布季" prop="season">
+          <el-input v-model="temp.season"/>
+        </el-form-item>
+        <el-form-item label="吊牌价" prop="price">
+          <el-input v-model="temp.cardPrice"/>
+        </el-form-item>
+        <el-form-item label="淘宝价" prop="price">
+          <el-input v-model="temp.taobaoPrice"/>
         </el-form-item>
 
         <!-- <el-form-item :label="$t('table.status')">
@@ -311,7 +318,14 @@
 </template>
 
 <script>
-import { fetchList, fetchPv, createArticle, updateArticle } from '@/api/article'
+import {
+  fetchList,
+  fetchPv,
+  createArticle,
+  updateArticle,
+  fetchCategoryList,
+  deleteProduct
+} from '@/api/article'
 import waves from '@/directive/waves' // Waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
@@ -406,6 +420,7 @@ export default {
   },
   created() {
     this.getList()
+    this.fetchCategoryList()
   },
   methods: {
     getList() {
@@ -419,6 +434,10 @@ export default {
           this.listLoading = false
         }, 1.5 * 1000)
       })
+    },
+    async fetchCategoryList() {
+      const category = await fetchCategoryList()
+      console.log('category', category)
     },
     handleFilter() {
       this.listQuery.p = 1

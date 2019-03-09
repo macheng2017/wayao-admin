@@ -34,8 +34,22 @@ export function createArticle(data) {
 
 export function updateArticle(data) {
   return request({
-    url: '/article/update',
-    method: 'post',
+    url: '/admin/product',
+    method: 'patch',
     data
+  })
+}
+export function fetchCategoryList() {
+  return request({
+    url: '/admin/category/list',
+    method: 'get'
+    // params
+  })
+}
+export function deleteProduct() {
+  return request({
+    url: '/admin/category/list',
+    method: 'get'
+    // params
   })
 }
