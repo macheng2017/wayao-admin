@@ -46,10 +46,10 @@ export function fetchCategoryList() {
     // params
   })
 }
-export function deleteProduct() {
+export function deleteProduct(data) {
   return request({
-    url: '/admin/category/list',
-    method: 'get'
-    // params
+    url: '/admin/product',
+    method: 'delete',
+    data
   })
 }

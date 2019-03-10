@@ -444,6 +444,9 @@ export default {
       this.getList()
     },
     handleModifyStatus(row, status) {
+      if (status === 'deleted') {
+        this.handleDelete(row)
+      }
       this.$message({
         message: '操作成功',
         type: 'success'
@@ -535,6 +538,7 @@ export default {
       })
     },
     handleDelete(row) {
+      deleteProduct(row)
       this.$notify({
         title: '成功',
         message: '删除成功',
