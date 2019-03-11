@@ -2,13 +2,8 @@
   <div class="app-container">
     <upload-excel-component :on-success="handleSuccess" :before-upload="beforeUpload"/>
 
-    <el-select v-model="key" class="filter-item" placeholder="Please select">
-      <el-option
-        v-for="item in categoryList"
-        :key="item._id"
-        :label="item.name"
-        :value="item.name"
-      />
+    <el-select v-model="categoryId" class="filter-item" placeholder="Please select">
+      <el-option v-for="item in categoryList" :key="item._id" :label="item.name" :value="item._id"/>
     </el-select>
     <el-button type="primary" @click="pushExcelData">提交数据</el-button>
 
@@ -20,7 +15,7 @@
 
 <script>
 import UploadExcelComponent from '@/components/UploadExcel/index.vue'
-import { postExcel } from '@/api/excel'
+// import { postExcel } from '@/api/excel'
 import { fetchCategoryList } from '@/api/product'
 
 export default {
@@ -31,8 +26,7 @@ export default {
       tableData: [],
       tableHeader: [],
       categoryList: [],
-      key: '',
-      categoryOptions: { name: '', value: '', _id: '' }
+      categoryId: '5bb32cf63567010bb66bdbf2' // 默认
     }
   },
   mounted() {
@@ -55,7 +49,14 @@ export default {
     pushExcelData() {
       console.log('tableData', this.tableData)
       console.log('tableHeader', this.tableHeader)
-      postExcel(this.tableData)
+      console.log('key', this.categoryOptions)
+      // const obj = Object.assign({}, this.tableData, this.categoryOptions)
+      // postExcel(this.tableData)
+      const obj = {
+        categoryId: this.categoryId,
+        excelData: this.tableData
+      }
+      console.log('obj', obj)
     },
     async fatchGategoryList() {
       const categoryData = await fetchCategoryList()
