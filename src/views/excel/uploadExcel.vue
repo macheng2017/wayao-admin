@@ -2,7 +2,7 @@
   <div class="app-container">
     <upload-excel-component :on-success="handleSuccess" :before-upload="beforeUpload"/>
 
-    <el-select v-model="categoryId" class="filter-item" placeholder="Please select">
+    <el-select v-model="categoryId" placeholder="Please select">
       <el-option v-for="item in categoryList" :key="item._id" :label="item.name" :value="item._id"/>
     </el-select>
     <el-button type="primary" @click="pushExcelData">提交数据</el-button>
@@ -15,7 +15,7 @@
 
 <script>
 import UploadExcelComponent from '@/components/UploadExcel/index.vue'
-// import { postExcel } from '@/api/excel'
+import { postExcel } from '@/api/excel'
 import { fetchCategoryList } from '@/api/product'
 
 export default {
@@ -47,16 +47,18 @@ export default {
       return false
     },
     pushExcelData() {
-      console.log('tableData', this.tableData)
-      console.log('tableHeader', this.tableHeader)
-      console.log('key', this.categoryOptions)
+      if (this.tableData.length <= 0) {
+        return
+      }
+
       // const obj = Object.assign({}, this.tableData, this.categoryOptions)
-      // postExcel(this.tableData)
-      const obj = {
+
+      const bodyData = {
         categoryId: this.categoryId,
         excelData: this.tableData
       }
-      console.log('obj', obj)
+      postExcel(bodyData)
+      // console.log('obj', bodyData)
     },
     async fatchGategoryList() {
       const categoryData = await fetchCategoryList()
