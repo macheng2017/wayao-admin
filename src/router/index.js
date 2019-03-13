@@ -94,6 +94,24 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/upload',
+    component: Layout,
+    redirect: '/upload/qiniu',
+    name: 'Upload',
+    meta: {
+      title: 'upload',
+      icon: 'upload'
+    },
+    children: [
+      {
+        path: 'qiniu',
+        component: () => import('@/views/qiniu/upload'),
+        name: 'upload',
+        meta: { title: 'upload' }
+      }
+    ]
+  },
+  {
     path: '/form',
     component: Layout,
     children: [

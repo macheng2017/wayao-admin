@@ -42,7 +42,9 @@ export default {
     return {
       dialogVisible: false,
       listObj: {},
-      fileList: []
+      fileList: [],
+      tempUrl: '',
+      dataObj: { token: '', key: '' }
     }
   },
   methods: {
@@ -66,6 +68,7 @@ export default {
     },
     handleSuccess(response, file) {
       const uid = file.uid
+      console.log('uid', uid)
       const objKeyArr = Object.keys(this.listObj)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
         if (this.listObj[objKeyArr[i]].uid === uid) {

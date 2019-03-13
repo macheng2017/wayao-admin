@@ -583,6 +583,9 @@ export default {
           }
         })
       )
+    },
+    imageSuccessCBK(event) {
+      console.log('event', event)
     }
   }
 }
