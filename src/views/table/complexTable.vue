@@ -74,6 +74,10 @@
       >{{ $t('table.reviewer') }}</el-checkbox>
     </div>
 
+    <div class="editor-custom-btn-container">
+      <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
+    </div>
+
     <el-table
       v-loading="listLoading"
       :key="tableKey"
@@ -329,6 +333,7 @@ import {
 import waves from '@/directive/waves' // Waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import editorImage from './components/editorImage'
 
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
@@ -345,7 +350,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
 
 export default {
   name: 'ComplexTable',
-  components: { Pagination },
+  components: { Pagination, editorImage },
   directives: { waves },
   filters: {
     statusFilter(status) {
