@@ -3,11 +3,13 @@
     :data="dataObj"
     :multiple="true"
     :before-upload="beforeUpload"
-    action="http://poas2fjxy.bkt.clouddn.com"
+    :file-list="fileList"
+    action="https://upload.qiniup.com"
     drag
   >
     <i class="el-icon-upload"/>
-    <div class="el-upload__text">将文件拖到此处，或
+    <div class="el-upload__text">
+      将文件拖到此处，或
       <em>点击上传</em>
     </div>
   </el-upload>
@@ -27,13 +29,18 @@ export default {
     }
   },
   methods: {
-    beforeUpload() {
+    beforeUpload(file) {
+      // console.log('file', file)
+      const fileData = {
+        fileName: file.name
+      }
       const _self = this
       return new Promise((resolve, reject) => {
-        getToken()
+        getToken(fileData)
           .then(response => {
-            const key = response.data.qiniu_key
-            const token = response.data.qiniu_token
+            console.log('response', response)
+            const key = response.data.fileName
+            const token = response.data.uploadToken
             _self._data.dataObj.token = token
             _self._data.dataObj.key = key
             resolve(true)

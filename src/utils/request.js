@@ -36,7 +36,7 @@ service.interceptors.response.use(
     // console.log('response interceptors', res)
     if (res.code !== 0) {
       Message({
-        message: res.message,
+        message: res.data.msg,
         type: 'error',
         duration: 10 * 1000
       })
