@@ -114,13 +114,13 @@
       <el-table-column label="图片" width="90">
         <template slot-scope="scope">
           <img
-            :src="'http://lining.xugaoyang.com/upload/img/' + scope.row.img"
+            :src="'http://poas2fjxy.bkt.clouddn.com/' + scope.row.img"
             width="70px"
             height="70px"
           >
         </template>
       </el-table-column>
-      <el-table-column label="颜色" width="250">
+      <el-table-column label="颜色" width="270">
         <template slot-scope="scope">{{ scope.row.color }}</template>
       </el-table-column>
       <el-table-column label="性别" width="110" align="center">
@@ -148,6 +148,16 @@
           <span>{{ scope.row.sex }}</span>
         </template>
       </el-table-column>
+      <el-table-column label="美码" width="110px" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.usSize }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="备注" width="120px" align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.comment }}</span>
+        </template>
+      </el-table-column>
 
       <el-table-column
         v-if="showReviewer"
@@ -169,7 +179,7 @@
           />
         </template>
       </el-table-column>-->
-      <el-table-column :label="$t('table.readings')" align="center" width="95">
+      <!-- <el-table-column :label="$t('table.readings')" align="center" width="95">
         <template slot-scope="scope">
           <span
             v-if="scope.row.pageviews"
@@ -178,18 +188,18 @@
           >{{ scope.row.pageviews }}</span>
           <span v-else>0</span>
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <!-- 状态 -->
-      <el-table-column :label="$t('table.status')" class-name="status-col" width="100">
+      <!-- <el-table-column :label="$t('table.status')" class-name="status-col" width="100">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
-      </el-table-column>
+      </el-table-column>-->
       <!-- 操作 -->
       <el-table-column
         :label="$t('table.actions')"
         align="center"
-        width="230"
+        width="260"
         class-name="small-padding fixed-width"
       >
         <!-- 编辑 -->

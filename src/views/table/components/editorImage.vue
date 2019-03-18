@@ -14,6 +14,7 @@
         :show-file-list="true"
         :on-remove="handleRemove"
         :on-success="handleSuccess"
+        :data="dataObj"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
         action="http://upload.qiniup.com"
@@ -29,6 +30,8 @@
 
 <script>
 import { getToken } from '@/api/qiniu'
+import { postFileName } from '@/api/upload'
+// import R from 'ramda'
 
 export default {
   name: 'EditorSlideUpload',
@@ -61,19 +64,30 @@ export default {
         )
         return
       }
-      this.$emit('successCBK', arr)
+      const newArr = arr.map(v => {
+        return { fileName: v.url.split('.').shift(), img: v.url }
+      })
+
+      // console.log('objList', this.listObj)
+      console.log('arr', newArr)
+      postFileName(newArr)
+      // this.$emit('successCBK', arr)
+
       this.listObj = {}
       this.fileList = []
       this.dialogVisible = false
     },
     handleSuccess(response, file) {
+      // 收集返回值
       const uid = file.uid
-      console.log('uid', uid)
+      // console.log('uid', uid)
       const objKeyArr = Object.keys(this.listObj)
+      // console.log('objKeyArr', objKeyArr)
       for (let i = 0, len = objKeyArr.length; i < len; i++) {
         if (this.listObj[objKeyArr[i]].uid === uid) {
-          this.listObj[objKeyArr[i]].url = response.files.file
+          this.listObj[objKeyArr[i]].url = response.key
           this.listObj[objKeyArr[i]].hasSuccess = true
+          // console.log('for', i)
           return
         }
       }
@@ -92,6 +106,9 @@ export default {
       const _self = this
       const _URL = window.URL || window.webkitURL
       const fileName = file.uid
+      const fileData = {
+        fileName: file.name
+      }
       this.listObj[fileName] = {}
       return new Promise((resolve, reject) => {
         const img = new Image()
@@ -104,13 +121,13 @@ export default {
             height: this.height
           }
         }
-        getToken()
+        getToken(fileData)
           .then(response => {
-            const key = response.data.qiniu_key
-            const token = response.data.qiniu_token
+            const key = response.data.fileName
+            const token = response.data.uploadToken
             _self._data.dataObj.token = token
             _self._data.dataObj.key = key
-            this.tempUrl = response.data.qiniu_url
+            this.tempUrl = response.data.qiniuUrl
             resolve(true)
           })
           .catch(err => {
