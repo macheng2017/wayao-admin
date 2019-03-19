@@ -26,7 +26,7 @@ export default {
       tableData: [],
       tableHeader: [],
       categoryList: [],
-      categoryId: '5bb32cf63567010bb66bdbf2' // 默认
+      categoryId: ''
     }
   },
   mounted() {
@@ -46,18 +46,42 @@ export default {
       })
       return false
     },
-    pushExcelData() {
+    async pushExcelData() {
       if (this.tableData.length <= 0) {
+        this.$message({
+          message: '没有数据,请先添加excel',
+          type: 'warning'
+        })
         return
       }
 
       // const obj = Object.assign({}, this.tableData, this.categoryOptions)
+      if (this.categoryId === '') {
+        this.categoryList.map(v => {
+          if (v.name === '默认') {
+            this.categoryId = v._id
+          }
+        })
+      }
 
       const bodyData = {
         categoryId: this.categoryId,
         excelData: this.tableData
       }
-      postExcel(bodyData)
+      const res = await postExcel(bodyData)
+      console.log('res', res)
+      if (res.code === 0) {
+        console.log('object')
+        this.$notify({
+          title: '成功',
+          message: '数据添加成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.tableData = []
+        this.tableHeader = []
+      }
+
       // console.log('obj', bodyData)
     },
     async fatchGategoryList() {

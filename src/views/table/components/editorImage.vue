@@ -56,7 +56,7 @@ export default {
         item => this.listObj[item].hasSuccess
       )
     },
-    handleSubmit() {
+    async handleSubmit() {
       const arr = Object.keys(this.listObj).map(v => this.listObj[v])
       if (!this.checkAllSuccess()) {
         this.$message(
@@ -65,14 +65,37 @@ export default {
         return
       }
       const newArr = arr.map(v => {
-        return { fileName: v.url.split('.').shift(), img: v.url }
+        const str = v.url.split('.').shift()
+        const chatArr = str.split('-')
+        // 根据切分的数组长度判断一个款号中有一张或者多张图片
+        let fileName = null
+        let styleNumber = null
+        let multiImg = false
+        if (chatArr.length > 2) {
+          fileName = str
+          chatArr.pop()
+          styleNumber = chatArr.join('-')
+          console.log('fileName3', fileName)
+          multiImg = true
+        } else {
+          fileName = str
+          styleNumber = str
+        }
+        return { styleNumber, fileName, img: v.url, multiImg }
       })
 
       // console.log('objList', this.listObj)
-      console.log('arr', newArr)
-      postFileName(newArr)
+      // console.log('arr', newArr)
+      const res = await postFileName(newArr)
       // this.$emit('successCBK', arr)
-
+      if (res.code === 0) {
+        this.$notify({
+          title: '成功',
+          message: '图片更新成功',
+          type: 'success',
+          duration: 2000
+        })
+      }
       this.listObj = {}
       this.fileList = []
       this.dialogVisible = false

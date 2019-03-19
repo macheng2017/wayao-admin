@@ -441,7 +441,15 @@ export default {
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.products
+        let list = response.data.products
+        list = list.map(v => {
+          // console.log('img', v.img.img)
+          return Object.assign({}, v, {
+            img: v.img ? v.img.img[0] : ''
+          })
+        })
+        this.list = list
+        // console.log('list111', this.list)
         this.total = response.data.total
 
         // Just to simulate the time of the request
