@@ -55,23 +55,41 @@ export const constantRouterMap = [
     name: 'Example',
     meta: { title: '袜妖管理系统', icon: 'example' },
     children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: '商品列表', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
+      // {
+      //   path: 'table',
+      //   name: 'Table',
+      //   component: () => import('@/views/table/index'),
+      //   meta: { title: '商品列表', icon: 'table' }
+      // },
+      // {
+      //   path: 'tree',
+      //   name: 'Tree',
+      //   component: () => import('@/views/tree/index'),
+      //   meta: { title: 'Tree', icon: 'tree' }
+      // },
       {
         path: 'complex-table',
         name: 'Complex-table',
         component: () => import('@/views/table/complexTable'),
-        meta: { title: 'Tree', icon: 'table' }
+        meta: { title: '商品列表', icon: 'table' }
+      }
+    ]
+  },
+  {
+    path: '/slideBanner',
+    component: Layout,
+    redirect: '/slideBanner',
+    name: 'Slide',
+    meta: {
+      title: 'slide',
+      icon: 'slide'
+    },
+    children: [
+      {
+        path: 'slide',
+        component: () => import('@/views/table/homeSlide'),
+        name: 'MangeSlide',
+        meta: { title: '轮播图片管理', icon: 'form' }
       }
     ]
   },
@@ -89,7 +107,7 @@ export const constantRouterMap = [
         path: 'upload-excel',
         component: () => import('@/views/excel/uploadExcel'),
         name: 'UploadExcel',
-        meta: { title: 'uploadExcel' }
+        meta: { title: '上传Excel', icon: 'form' }
       }
     ]
   },
