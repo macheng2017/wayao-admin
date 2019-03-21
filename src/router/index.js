@@ -87,7 +87,7 @@ export const constantRouterMap = [
     children: [
       {
         path: 'slide',
-        component: () => import('@/views/table/homeSlide'),
+        component: () => import('@/views/homeSlide/index'),
         name: 'MangeSlide',
         meta: { title: '轮播图片管理', icon: 'form' }
       }

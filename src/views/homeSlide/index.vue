@@ -42,12 +42,12 @@
           >
         </template>
       </el-table-column>
-      <el-table-column label="颜色" width="270">
-        <template slot-scope="scope">{{ scope.row.color }}</template>
+      <el-table-column label="标题" width="270">
+        <template slot-scope="scope">{{ scope.row.title }}</template>
       </el-table-column>
-      <el-table-column label="性别" width="110" align="center">
+      <el-table-column label="跳转地址" width="110" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.sex }}</span>
+          <span>{{ scope.row.title }}</span>
         </template>
       </el-table-column>
 
@@ -104,12 +104,13 @@
         style="width: 400px; margin-left:50px;"
       >
         <!-- rules 还没有编写,这个不是重点,重点是把原有的功能,先跑通,然后再添加新的功能 -->
-        <el-form-item label="颜色" prop="title1">
-          <el-input v-model="temp.color"/>
+        <el-form-item label="标题" prop="title">
+          <el-input v-model="temp.title"/>
         </el-form-item>
-        <el-form-item label="性别" prop="sex">
-          <el-input v-model="temp.sex"/>
+        <el-form-item label="跳转链接" prop="sex">
+          <el-input v-model="temp.url"/>
         </el-form-item>
+        <simple-upload @successCBK="imageSuccessCBK"/>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">{{ $t('table.cancel') }}</el-button>
@@ -136,15 +137,15 @@
 import {
   fetchList,
   fetchPv,
-  createArticle,
+  createSlide,
   updateArticle,
   fetchCategoryList,
-  deleteProduct
-} from '@/api/product'
+  deleteSlide
+} from '@/api/slide'
 import waves from '@/directive/waves' // Waves directive
 import { parseTime } from '@/utils'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
-import editorImage from './components/editorImage'
+import simpleUpload from '@/components/SimpleUpload'
 
 const calendarTypeOptions = [
   { key: 'CN', display_name: 'China' },
@@ -161,7 +162,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
 
 export default {
   name: 'ComplexTable',
-  components: { Pagination, editorImage },
+  components: { Pagination, simpleUpload },
   directives: { waves },
   filters: {
     statusFilter(status) {
@@ -231,7 +232,8 @@ export default {
           { required: true, message: 'title is required', trigger: 'blur' }
         ]
       },
-      downloadLoading: false
+      downloadLoading: false,
+      uploadImgList: []
     }
   },
   created() {
@@ -242,7 +244,7 @@ export default {
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        let list = response.data.products
+        let list = response.data.slideList
         list = list.map(v => {
           // console.log('img', v.img.img)
           return Object.assign({}, v, {
@@ -313,9 +315,13 @@ export default {
     createData() {
       this.$refs['dataForm'].validate(valid => {
         if (valid) {
-          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
-          this.temp.author = 'vue-element-admin'
-          createArticle(this.temp).then(() => {
+          // this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
+          // this.temp.author = 'vue-element-admin'
+          const imgList = this.uploadImgList
+          const tempData = Object.assign({ imgList }, this.temp)
+          console.log('tempData', tempData)
+
+          createSlide(tempData).then(() => {
             this.list.unshift(this.temp)
             this.dialogFormVisible = false
             this.$notify({
@@ -362,7 +368,7 @@ export default {
       })
     },
     handleDelete(row) {
-      deleteProduct(row)
+      deleteSlide(row)
       this.$notify({
         title: '成功',
         message: '删除成功',
@@ -405,6 +411,7 @@ export default {
     },
     imageSuccessCBK(event) {
       console.log('event', event)
+      this.uploadImgList = event
     }
   }
 }

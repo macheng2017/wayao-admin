@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {
+export function fetchList() {
   return request({
-    url: '/admin/product/list',
-    method: 'get',
-    params: query
+    url: '/admin/slideShow/list',
+    method: 'get'
+    // params: query
   })
 }
 
@@ -24,9 +24,9 @@ export function fetchPv(pv) {
   })
 }
 
-export function createArticle(data) {
+export function createSlide(data) {
   return request({
-    url: '/article/create',
+    url: '/admin/slideShow',
     method: 'post',
     data
   })
@@ -46,9 +46,9 @@ export function fetchCategoryList() {
     // params
   })
 }
-export function deleteProduct(data) {
+export function deleteSlide(data) {
   return request({
-    url: '/admin/product',
+    url: '/admin/slideShow',
     method: 'delete',
     data
   })
