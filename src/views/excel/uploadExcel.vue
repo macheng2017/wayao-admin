@@ -6,6 +6,7 @@
       <el-option v-for="item in categoryList" :key="item._id" :label="item.name" :value="item._id"/>
     </el-select>
     <el-button type="primary" @click="pushExcelData">提交数据</el-button>
+    <a href="https://pan.baidu.com/s/12EESB3jhlYSWbWMCCi796g">点我下载excel模板</a>
 
     <el-table :data="tableData" border highlight-current-row style="width: 100%;margin-top:20px;">
       <el-table-column v-for="item of tableHeader" :prop="item" :label="item" :key="item"/>

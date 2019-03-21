@@ -142,9 +142,9 @@
       <el-table-column label="淘宝价" width="110" align="center">
         <template slot-scope="scope">{{ scope.row.taobaoPrice }}</template>
       </el-table-column>
-      <el-table-column label="性别" width="110px" align="center">
+      <el-table-column label="库存" width="110px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.sex }}</span>
+          <span>{{ scope.row.count }}</span>
         </template>
       </el-table-column>
       <el-table-column label="美码" width="110px" align="center">
@@ -265,7 +265,7 @@
           />
         </el-form-item>-->
         <!-- rules 还没有编写,这个不是重点,重点是把原有的功能,先跑通,然后再添加新的功能 -->
-        <el-form-item label="颜色" prop="title1">
+        <el-form-item label="颜色" prop="title">
           <el-input v-model="temp.color"/>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
@@ -280,11 +280,17 @@
         <el-form-item label="发布季" prop="season">
           <el-input v-model="temp.season"/>
         </el-form-item>
-        <el-form-item label="吊牌价" prop="price">
+        <el-form-item label="吊牌价" prop="cardPrice">
           <el-input v-model="temp.cardPrice"/>
         </el-form-item>
-        <el-form-item label="淘宝价" prop="price">
+        <el-form-item label="淘宝价" prop="taobaoPrice">
           <el-input v-model="temp.taobaoPrice"/>
+        </el-form-item>
+        <el-form-item label="库存" prop="count">
+          <el-input v-model="temp.count"/>
+        </el-form-item>
+        <el-form-item label="美码" prop="usSize">
+          <el-input v-model="temp.usSize"/>
         </el-form-item>
 
         <!-- <el-form-item :label="$t('table.status')">
@@ -607,3 +613,15 @@ export default {
   }
 }
 </script>
+<style scoped>
+.filter-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.editor-custom-btn-container {
+  margin-left: 10px;
+}
+</style>
+

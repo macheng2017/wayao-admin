@@ -3,7 +3,7 @@
     <el-button
       :style="{background:color,borderColor:color}"
       icon="el-icon-upload"
-      size="mini"
+      size="normal"
       type="primary"
       @click=" dialogVisible=true"
     >上传图片</el-button>
