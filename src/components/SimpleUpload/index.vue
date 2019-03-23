@@ -17,7 +17,7 @@
         :data="dataObj"
         :before-upload="beforeUpload"
         class="editor-slide-upload"
-        action="http://upload.qiniup.com"
+        action="https://upload.qiniup.com"
         list-type="picture-card"
       >
         <el-button size="small" type="primary">点击上传</el-button>

@@ -1,5 +1,5 @@
 // 配置项
-const host = 'http://localhost:1337'
+const host = 'http://localhost:3000'
 // 从本地切换为线上开发环境域名
 // const host = 'https://lining.xugaoyang.com'
 
