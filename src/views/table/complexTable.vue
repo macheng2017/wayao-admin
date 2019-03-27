@@ -51,13 +51,13 @@
         icon="el-icon-search"
         @click="handleFilter"
       >{{ $t('table.search') }}</el-button>
-      <el-button
+      <!-- <el-button
         class="filter-item"
         style="margin-left: 10px;"
         type="primary"
         icon="el-icon-edit"
         @click="handleCreate"
-      >{{ $t('table.add') }}</el-button>
+      >{{ $t('table.add') }}</el-button>-->
       <el-button
         v-waves
         :loading="downloadLoading"
@@ -152,7 +152,7 @@
           <span>{{ scope.row.usSize }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="备注" width="120px" align="center">
+      <el-table-column label="备注" width="110px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.comment }}</span>
         </template>
@@ -265,7 +265,7 @@
           />
         </el-form-item>-->
         <!-- rules 还没有编写,这个不是重点,重点是把原有的功能,先跑通,然后再添加新的功能 -->
-        <el-form-item label="颜色" prop="title">
+        <el-form-item label="颜色" prop="color">
           <el-input v-model="temp.color"/>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
