@@ -112,11 +112,7 @@
       </el-table-column>-->
       <el-table-column label="图片" width="90">
         <template slot-scope="scope">
-          <img
-            :src="'http://poas2fjxy.bkt.clouddn.com/' + scope.row.img"
-            width="70px"
-            height="70px"
-          >
+          <img :src="'http://img1.miniapp.wayao.net.cn/' + scope.row.img" width="70px" height="70px">
         </template>
       </el-table-column>
       <el-table-column label="颜色" width="270">

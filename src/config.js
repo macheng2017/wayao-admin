@@ -10,7 +10,7 @@ const config = {
   // 配置vuex中的imgCDN,如果用的是本地服务器存储图片
   // 该项就是服务器域名,如果使用的是七牛云服务器该项是七牛云配置的域名或者cdn
   // imageCDN: 'http://localhost:1337',
-  imageCDN: 'https://lining.xugaoyang.com/',
+  imageCDN: 'http://img1.miniapp.wayao.net.cn/',
   // 默认图片
   defImg: 'default.jpeg'
 }
