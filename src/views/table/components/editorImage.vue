@@ -132,6 +132,7 @@ export default {
       const fileData = {
         fileName: file.name
       }
+      console.log('fileData---------------', fileData)
       this.listObj[fileName] = {}
       return new Promise((resolve, reject) => {
         const img = new Image()

@@ -53,3 +53,10 @@ export function deleteProduct(data) {
     data
   })
 }
+
+export function updateExistImg() {
+  return request({
+    url: '/api/v1/updateImg',
+    method: 'get'
+  })
+}

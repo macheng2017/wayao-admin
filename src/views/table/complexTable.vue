@@ -58,14 +58,24 @@
         icon="el-icon-edit"
         @click="handleCreate"
       >{{ $t('table.add') }}</el-button>-->
-      <el-button
+      <!-- <el-button
         v-waves
         :loading="downloadLoading"
         class="filter-item"
         type="primary"
         icon="el-icon-download"
         @click="handleDownload"
-      >{{ $t('table.export') }}</el-button>
+      >{{ $t('table.export') }}</el-button>-->
+
+      <el-button
+        v-loading.fullscreen.lock="fullscreenLoading"
+        element-loading-text="拼命处理中,请稍等"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.8)"
+        type="primary"
+        icon="el-icon-edit"
+        @click="updateExistImg"
+      >更新图片</el-button>
       <!-- <el-checkbox
         v-model="showReviewer"
         class="filter-item"
@@ -113,7 +123,7 @@
       <el-table-column label="图片" width="90">
         <template slot-scope="scope">
           <img
-            :src="'http://img.miniapp.wayao.net.cn/' + scope.row.img"
+            :src="'http://img1.miniapp.wayao.net.cn/' + scope.row.img"
             width="70px"
             height="70px"
           >
@@ -343,7 +353,8 @@ import {
   createArticle,
   updateArticle,
   fetchCategoryList,
-  deleteProduct
+  deleteProduct,
+  updateExistImg
 } from '@/api/product'
 import waves from '@/directive/waves' // Waves directive
 import { parseTime } from '@/utils'
@@ -435,7 +446,8 @@ export default {
           { required: true, message: 'title is required', trigger: 'blur' }
         ]
       },
-      downloadLoading: false
+      downloadLoading: false,
+      fullscreenLoading: false
     }
   },
   created() {
@@ -609,6 +621,24 @@ export default {
     },
     imageSuccessCBK(event) {
       console.log('event', event)
+    },
+    async updateExistImg() {
+      this.fullscreenLoading = true
+      try {
+        await updateExistImg()
+        this.$notify({
+          title: '成功',
+          message: '更新图片成功',
+          type: 'success',
+          duration: 2000
+        })
+        this.fullscreenLoading = false
+      } catch (error) {
+        this.$message({
+          message: `操作失败${error}`,
+          type: 'error'
+        })
+      }
     }
   }
 }
