@@ -70,11 +70,11 @@
       >
         <!-- 编辑 -->
         <template slot-scope="scope">
-          <el-button
+          <!-- <el-button
             type="primary"
             size="mini"
             @click="handleUpdate(scope.row)"
-          >{{ $t('table.edit') }}</el-button>
+          >{{ $t('table.edit') }}</el-button>-->
 
           <el-button
             v-if="scope.row.status!='deleted'"
