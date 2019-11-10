@@ -8,7 +8,7 @@ const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
   // baseURL: 'https://api.wayao.net.cn', // api 的 base_url
   // baseURL: 'http://api.wayao.net.cn', // api 的 base_url
-  timeout: 30000 // 请求超时时间
+  timeout: 900000 // 请求超时时间
 })
 
 // request拦截器

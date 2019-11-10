@@ -69,7 +69,7 @@
 
       <el-button
         v-loading.fullscreen.lock="fullscreenLoading"
-        element-loading-text="拼命处理中,请稍等"
+        element-loading-text="图片更新通常耗时,有可能超过1分钟,请耐心等待"
         element-loading-spinner="el-icon-loading"
         element-loading-background="rgba(0, 0, 0, 0.8)"
         type="primary"
@@ -83,7 +83,7 @@
         @change="tableKey=tableKey+1"
       >{{ $t('table.reviewer') }}</el-checkbox>-->
       <div class="editor-custom-btn-container">
-        <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK"/>
+        <editorImage color="#1890ff" class="editor-upload-btn" @successCBK="imageSuccessCBK" />
       </div>
     </div>
 
@@ -122,11 +122,12 @@
       </el-table-column>-->
       <el-table-column label="图片" width="90">
         <template slot-scope="scope">
+          <!--  eslint-disable  -->
           <img
             :src="'http://img1.miniapp.wayao.net.cn/' + scope.row.img"
             width="70px"
             height="70px"
-          >
+          />
         </template>
       </el-table-column>
       <el-table-column label="颜色" width="270">
@@ -276,31 +277,31 @@
         </el-form-item>-->
         <!-- rules 还没有编写,这个不是重点,重点是把原有的功能,先跑通,然后再添加新的功能 -->
         <el-form-item label="颜色" prop="color">
-          <el-input v-model="temp.color"/>
+          <el-input v-model="temp.color" />
         </el-form-item>
         <el-form-item label="性别" prop="sex">
-          <el-input v-model="temp.sex"/>
+          <el-input v-model="temp.sex" />
         </el-form-item>
         <el-form-item label="尺寸" prop="size">
-          <el-input v-model="temp.size"/>
+          <el-input v-model="temp.size" />
         </el-form-item>
         <el-form-item label="款号" prop="styleNumber">
-          <el-input v-model="temp.styleNumber"/>
+          <el-input v-model="temp.styleNumber" />
         </el-form-item>
         <el-form-item label="发布季" prop="season">
-          <el-input v-model="temp.season"/>
+          <el-input v-model="temp.season" />
         </el-form-item>
         <el-form-item label="吊牌价" prop="cardPrice">
-          <el-input v-model="temp.cardPrice"/>
+          <el-input v-model="temp.cardPrice" />
         </el-form-item>
         <el-form-item label="淘宝价" prop="taobaoPrice">
-          <el-input v-model="temp.taobaoPrice"/>
+          <el-input v-model="temp.taobaoPrice" />
         </el-form-item>
         <el-form-item label="库存" prop="count">
-          <el-input v-model="temp.count"/>
+          <el-input v-model="temp.count" />
         </el-form-item>
         <el-form-item label="美码" prop="usSize">
-          <el-input v-model="temp.usSize"/>
+          <el-input v-model="temp.usSize" />
         </el-form-item>
 
         <!-- <el-form-item :label="$t('table.status')">
@@ -336,8 +337,8 @@
 
     <el-dialog :visible.sync="dialogPvVisible" title="Reading statistics">
       <el-table :data="pvData" border fit highlight-current-row style="width: 100%">
-        <el-table-column prop="key" label="Channel"/>
-        <el-table-column prop="pv" label="Pv"/>
+        <el-table-column prop="key" label="Channel" />
+        <el-table-column prop="pv" label="Pv" />
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="dialogPvVisible = false">{{ $t('table.confirm') }}</el-button>
