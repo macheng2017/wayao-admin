@@ -53,7 +53,7 @@ export function deleteProduct(data) {
     data
   })
 }
-
+// 刷新产品图片
 export function updateExistImg() {
   return request({
     url: '/api/v1/updateImg',

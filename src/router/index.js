@@ -52,15 +52,15 @@ export const constantRouterMap = [
   {
     path: '/example',
     component: Layout,
-    redirect: '/example/table',
+    redirect: '/example/product',
     name: 'Example',
     meta: { title: '袜妖管理系统', icon: 'example' },
     children: [
       // {
-      //   path: 'table',
+      //   path: 'product',
       //   name: 'Table',
-      //   component: () => import('@/views/table/index'),
-      //   meta: { title: '商品列表', icon: 'table' }
+      //   component: () => import('@/views/product/index'),
+      //   meta: { title: '商品列表', icon: 'product' }
       // },
       // {
       //   path: 'tree',
@@ -70,8 +70,8 @@ export const constantRouterMap = [
       // },
       {
         path: 'complex-table',
-        name: 'Complex-table',
-        component: () => import('@/views/table/complexTable'),
+        name: 'Complex-product',
+        component: () => import('@/views/product/productList'),
         meta: { title: '商品列表', icon: 'table' }
       }
     ]
@@ -88,7 +88,7 @@ export const constantRouterMap = [
     children: [
       {
         path: 'slide',
-        component: () => import('@/views/homeSlide/index'),
+        component: () => import('@/views/banner/index'),
         name: 'MangeSlide',
         meta: { title: '轮播图片管理', icon: 'form' }
       }

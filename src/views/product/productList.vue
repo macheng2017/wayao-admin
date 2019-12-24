@@ -109,17 +109,17 @@
           <span>{{ scope.$index+1 }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column :label="$t('table.date')" width="150px" align="center">
+      <!-- <el-product-column :label="$t('table.date')" width="150px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.meta.updatedAt | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
-      </el-table-column>-->
-      <!-- <el-table-column :label="$t('table.title')" min-width="150px">
+      </el-product-column>-->
+      <!-- <el-product-column :label="$t('table.title')" min-width="150px">
         <template slot-scope="scope">
           <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.title }}</span>
           <el-tag>{{ scope.row.type | typeFilter }}</el-tag>
         </template>
-      </el-table-column>-->
+      </el-product-column>-->
       <el-table-column label="图片" width="90">
         <template slot-scope="scope">
           <!--  eslint-disable  -->
@@ -179,7 +179,7 @@
           <span style="color:red;">{{ scope.row.reviewer }}</span>
         </template>
       </el-table-column>
-      <!-- <el-table-column :label="$t('table.importance')" width="80px">
+      <!-- <el-product-column :label="$t('table.importance')" width="80px">
         <template slot-scope="scope">
           <svg-icon
             v-for="n in +scope.row.importance"
@@ -188,8 +188,8 @@
             class="meta-item__icon"
           />
         </template>
-      </el-table-column>-->
-      <!-- <el-table-column :label="$t('table.readings')" align="center" width="95">
+      </el-product-column>-->
+      <!-- <el-product-column :label="$t('table.readings')" align="center" width="95">
         <template slot-scope="scope">
           <span
             v-if="scope.row.pageviews"
@@ -198,13 +198,13 @@
           >{{ scope.row.pageviews }}</span>
           <span v-else>0</span>
         </template>
-      </el-table-column>-->
+      </el-product-column>-->
       <!-- 状态 -->
-      <!-- <el-table-column :label="$t('table.status')" class-name="status-col" width="100">
+      <!-- <el-product-column :label="$t('table.status')" class-name="status-col" width="100">
         <template slot-scope="scope">
           <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
         </template>
-      </el-table-column>-->
+      </el-product-column>-->
       <!-- 操作 -->
       <el-table-column
         :label="$t('table.actions')"
@@ -604,7 +604,7 @@ export default {
         excel.export_json_to_excel({
           header: tHeader,
           data,
-          filename: 'table-list'
+          filename: 'product-list'
         })
         this.downloadLoading = false
       })
